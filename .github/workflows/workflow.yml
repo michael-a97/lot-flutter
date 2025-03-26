@@ -1,0 +1,89 @@
+name: workflow
+
+on: [ pull_request ]
+
+jobs:
+  analyze:
+    name: Flutter Analyze
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.29.0
+      - run: flutter --version
+
+      - name: Install Tools
+        run: ./.github/scripts/install-tools.sh
+
+      - name: Download Dependencies
+        run: very_good packages get -r
+
+      - name: Analyze
+        run: dart analyze --fatal-infos --fatal-warnings .
+
+      - name: Run Invertase Analyze
+        uses: invertase/github-action-dart-analyzer@v1
+        with:
+          fatal-infos: true
+          fatal-warnings: true
+
+  format:
+    name: Flutter Format
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.29.0
+      - run: flutter --version
+
+      - name: Install Tools
+        run: ./.github/scripts/install-tools.sh
+
+      - name: Download Dependencies
+        run: very_good packages get -r
+
+      - name: Format
+        run: dart format --set-exit-if-changed .
+
+  test:
+    name: Flutter Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.29.0
+      - run: flutter --version
+
+      - name: Install Tools
+        run: ./.github/scripts/install-tools.sh
+
+      - name: Download Dependencies
+        run: very_good packages get -r
+
+      - name: Run Test
+        run: very_good test -r --coverage
+
+      - name: Clean Coverage Report
+        run: ./.github/scripts/clean-coverage-report.sh
+
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
