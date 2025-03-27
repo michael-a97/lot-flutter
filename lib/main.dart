@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
-void main() {
-  runApp(const MainApp());
-}
+import 'application/application.dart';
+import 'config/config.dart';
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final packageInfo = await PackageInfo.fromPlatform();
+  AppConfig(version: packageInfo.version);
+  await configureDependencies();
+  runApp(const Application());
 }
