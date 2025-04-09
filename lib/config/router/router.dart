@@ -15,5 +15,6 @@ class AppRouter extends RootStackRouter {
   @override
   final List<AutoRoute> routes = [
     AdaptiveRoute(page: SplashRoute.page, path: '/'),
+    AdaptiveRoute(page: SignUpRoute.page),
   ];
 }

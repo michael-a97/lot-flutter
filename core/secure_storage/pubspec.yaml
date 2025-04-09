@@ -1,0 +1,6 @@
+name: secure_storage
+description: this package provides a secure way to store sensitive data
+environment:
+  sdk: ^3.7.0
+dependencies:
+  flutter_secure_storage: ^9.2.4
