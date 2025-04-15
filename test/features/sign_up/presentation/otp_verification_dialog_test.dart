@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dtos/dtos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -135,8 +136,71 @@ void main() {
       expect(find.byType(OtpInputField), findsOne);
       await tester.enterText(find.byType(OtpInputField), otp);
       await tester.tap(find.byType(VerifyOtpButton));
-
       verify(() => phoneNumberVerificationCubit.verifyOtp(otp)).called(1);
+    });
+
+    testWidgets('should show success snackbar when successful', (tester) async {
+      const phoneNumber = '+251923000000';
+      const otp = '123456';
+      const phoneNumberState = PhoneNumberVerificationState(
+        phoneNumber: phoneNumber,
+        status: StatusOtpVerificationComplete(),
+      );
+      whenListen(phoneNumberVerificationCubit, Stream.value(phoneNumberState));
+      when(
+        () => phoneNumberVerificationCubit.state,
+      ).thenReturn(phoneNumberState);
+      when(
+        () => phoneNumberVerificationCubit.verifyOtp(otp),
+      ).thenAnswer((_) async => const Right(unit));
+
+      const signUpState = SignUpState();
+      whenListen(signUpCubit, Stream.value(signUpState));
+      when(() => signUpCubit.state).thenReturn(signUpState);
+
+      await pumpWidgetUnderTest(tester);
+      await tester.pump(const Duration(milliseconds: 300));
+
+      expect(
+        find.ancestor(
+          of: find.text('Successfully verified phone number'),
+          matching: find.byType(SnackBar),
+        ),
+        findsOne,
+      );
+    });
+
+    testWidgets('should show error snackbar when unsuccessful', (tester) async {
+      const phoneNumber = '+251923000000';
+      const otp = '123456';
+      const phoneNumberState = PhoneNumberVerificationState(
+        phoneNumber: phoneNumber,
+        status: StatusOtpVerificationFailed(OtpVerificationError.unknown),
+      );
+      whenListen(phoneNumberVerificationCubit, Stream.value(phoneNumberState));
+      when(
+        () => phoneNumberVerificationCubit.state,
+      ).thenReturn(phoneNumberState);
+      when(
+        () => phoneNumberVerificationCubit.verifyOtp(otp),
+      ).thenAnswer((_) async => const Right(unit));
+
+      const signUpState = SignUpState();
+      whenListen(signUpCubit, Stream.value(signUpState));
+      when(() => signUpCubit.state).thenReturn(signUpState);
+
+      await pumpWidgetUnderTest(tester);
+      await tester.pump(const Duration(milliseconds: 300));
+
+      expect(
+        find.ancestor(
+          of: find.text('Something went wrong. Please try again'),
+          matching: find.byType(SnackBar),
+        ),
+        findsOne,
+      );
+
+      verify(()=> router.pop(false)).called(1);
     });
   });
 }

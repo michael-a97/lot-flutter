@@ -17,8 +17,6 @@ import '../../../../shared/shared.dart';
 
 part 'otp_input_field.dart';
 
-part 'otp_request_progress_indicator_dialog.dart';
-
 part 'otp_resend_button.dart';
 
 part 'otp_timeout_counter.dart';
