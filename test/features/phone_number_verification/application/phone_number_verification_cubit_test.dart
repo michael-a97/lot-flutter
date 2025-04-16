@@ -140,6 +140,21 @@ void main() {
       );
     });
 
+    blocTest<PhoneNumberVerificationCubit, PhoneNumberVerificationState>(
+      'should emit [ initial ] when resetting for resend',
+      seed:
+          () => const PhoneNumberVerificationState(
+            phoneNumber: '+251923000000',
+            verificationId: '1234',
+          ),
+      build: () => otpVerificationCubit,
+      act: (cubit) => cubit.resetForResend(),
+      expect:
+          () => [
+            const PhoneNumberVerificationState(phoneNumber: '+251923000000'),
+          ],
+    );
+
     group('resendOtpVerification', () {
       const resendToken = 1234;
       const verificationId = '1234';

@@ -35,22 +35,6 @@ class PhoneNumberVerificationState extends Equatable {
     );
   }
 
-  PhoneNumberVerificationState copyWith({
-    bool? isLoading,
-    int? resendToken,
-    String? phoneNumber,
-    String? verificationId,
-    PhoneVerificationStatus? status,
-  }) {
-    return PhoneNumberVerificationState(
-      isLoading: isLoading ?? this.isLoading,
-      resendToken: resendToken ?? this.resendToken,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
-      verificationId: verificationId ?? this.verificationId,
-      status: status ?? this.status,
-    );
-  }
-
   PhoneNumberVerificationState error(PhoneVerificationStatus status) {
     return PhoneNumberVerificationState(
       status: status,

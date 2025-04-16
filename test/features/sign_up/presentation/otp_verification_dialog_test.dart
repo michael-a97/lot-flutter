@@ -200,7 +200,7 @@ void main() {
         findsOne,
       );
 
-      verify(()=> router.pop(false)).called(1);
+      verify(() => router.pop(false)).called(1);
     });
   });
 }

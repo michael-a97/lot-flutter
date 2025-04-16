@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:data/data.dart';
 import 'package:dtos/dtos.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,7 +43,7 @@ class _OtpVerificationDialogState extends State<OtpVerificationDialog> {
         onTap: () => FocusScope.of(context).unfocus(),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: Spacing.xxxl),
+            padding: const EdgeInsets.symmetric(vertical: Spacing.xxl),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [

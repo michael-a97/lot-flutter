@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:data/data.dart';
 import 'package:dtos/dtos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:lot/features/phone_number_verification/phone_number_verification
 import 'package:lot/features/shared/shared.dart';
 import 'package:lot/features/shared/widgets/phone_number_input_field.dart';
 import 'package:lot/features/sign_up/application/sign_up_cubit.dart';
+import 'package:lot/features/sign_up/presentation/widgets/otp_verification_dialog/otp_verification_dialog.dart';
 import 'package:lot/features/sign_up/presentation/widgets/sign_up_view.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -206,6 +208,77 @@ void main() {
           of: find.text('Successfully created an account'),
           matching: find.byType(SnackBar),
         ),
+        findsOne,
+      );
+    });
+
+    testWidgets('should display OtpVerificationDialog when otp code is sent', (
+      test,
+    ) async {
+      const phoneNumberState = PhoneNumberVerificationState(
+        status: StatusOtpCodeSent(
+          phoneNumber: '+251923001100',
+          verificationId: '1234',
+          resendToken: 124,
+        ),
+      );
+      whenListen(phoneNumberVerificationCubit, Stream.value(phoneNumberState));
+      when(
+        () => phoneNumberVerificationCubit.state,
+      ).thenReturn(phoneNumberState);
+      const signUpState = SignUpState();
+      whenListen(signUpCubit, Stream.value(signUpState));
+      when(() => signUpCubit.state).thenReturn(signUpState);
+
+      await pumpWidgetUnderTest(test);
+      await test.pumpAndSettle(const Duration(milliseconds: 400));
+
+      expect(find.byType(OtpVerificationDialog), findsOneWidget);
+    });
+
+    testWidgets('should show a progress indicator when loading', (
+      tester,
+    ) async {
+      const phoneNumberState = PhoneNumberVerificationState();
+      whenListen(phoneNumberVerificationCubit, Stream.value(phoneNumberState));
+      when(
+        () => phoneNumberVerificationCubit.state,
+      ).thenReturn(phoneNumberState);
+
+      const signUpState = SignUpState(status: FormzSubmissionStatus.inProgress);
+      whenListen(signUpCubit, Stream.value(signUpState));
+      when(() => signUpCubit.state).thenReturn(signUpState);
+
+      await pumpWidgetUnderTest(tester);
+
+      await tester.pump();
+      expect(
+        find.byType(ProgressIndicatorDialog<SignUpCubit, SignUpState>),
+        findsOne,
+      );
+    });
+
+    testWidgets('should show a error Snackbar when sign up error occurs', (
+      tester,
+    ) async {
+      const phoneNumberState = PhoneNumberVerificationState();
+      whenListen(phoneNumberVerificationCubit, Stream.value(phoneNumberState));
+      when(
+        () => phoneNumberVerificationCubit.state,
+      ).thenReturn(phoneNumberState);
+
+      const signUpState = SignUpState(
+        status: FormzSubmissionStatus.failure,
+        error: ApiNetworkError.timeout(),
+      );
+      whenListen(signUpCubit, Stream.value(signUpState));
+      when(() => signUpCubit.state).thenReturn(signUpState);
+
+      await pumpWidgetUnderTest(tester);
+
+      await tester.pumpAndSettle();
+      expect(
+        find.text('Connection timeout. Please check your internet connection.'),
         findsOne,
       );
     });
