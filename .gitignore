@@ -50,3 +50,7 @@ GoogleService-Info.plist
 firebase.jsonlib/firebase_options.dart
 firebase.json
 firebase_options.dart
+coverage/*
+*unit_test_assets*
+*test_cache*
+*native_assets*
