@@ -6,7 +6,7 @@ class AppLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Lot.', //TODO: Add l10n
+      'Lot.',
       style: Theme.of(context).textTheme.displayLarge?.copyWith(
         fontWeight: FontWeight.bold,
         fontFamily: 'Boldonse',

@@ -1,3 +1,4 @@
+//coverage:ignore-file
 import 'package:auto_route/auto_route.dart';
 import 'package:injectable/injectable.dart';
 
@@ -15,5 +16,6 @@ class AppRouter extends RootStackRouter {
   @override
   final List<AutoRoute> routes = [
     AdaptiveRoute(page: SplashRoute.page, path: '/'),
+    AdaptiveRoute(page: SignUpRoute.page),
   ];
 }

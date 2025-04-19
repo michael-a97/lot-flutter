@@ -1,0 +1,9 @@
+name: dtos
+version: 0.0.1
+publish_to: none
+environment:
+  sdk: ^3.7.0
+description: A pure dart package for dtos used in the Lot app
+dependencies:
+  equatable: ^2.0.7
+  flutter_secure_storage: ^9.2.4
