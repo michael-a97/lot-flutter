@@ -5,7 +5,7 @@ export 'sign_up_request.dart';
 
 part 'user.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class User {
   final int id;
   final String phoneNumber;

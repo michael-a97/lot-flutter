@@ -20,16 +20,7 @@ Map<String, dynamic> _$SignInRequestToJson(SignInRequest instance) =>
 
 SignInResponse _$SignInResponseFromJson(Map<String, dynamic> json) =>
     SignInResponse(
-      userId: (json['id'] as num).toInt(),
       accessToken: json['access_token'] as String,
       refreshToken: json['refresh_token'] as String,
       user: User.fromJson(json['user'] as Map<String, dynamic>),
     );
-
-Map<String, dynamic> _$SignInResponseToJson(SignInResponse instance) =>
-    <String, dynamic>{
-      'id': instance.userId,
-      'access_token': instance.accessToken,
-      'refresh_token': instance.refreshToken,
-      'user': instance.user.toJson(),
-    };

@@ -7,5 +7,5 @@ class SignInRequest {
 
   const SignInRequest({required this.phoneNumber, required this.password});
 
-  Json toJson() => _$SignInFormToJson(this);
+  Json toJson() => _$SignInRequestToJson(this);
 }
