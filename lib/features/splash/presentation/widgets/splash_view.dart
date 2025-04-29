@@ -17,15 +17,16 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 1), () {
-      context.router.replace(const SignUpRoute());
+    Timer(const Duration(seconds: 2), () {
+      if (context.mounted) {
+        context.router.replace(const HomeRoute());
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     return Scaffold(
       backgroundColor: theme.primaryColor,
       body: SafeArea(

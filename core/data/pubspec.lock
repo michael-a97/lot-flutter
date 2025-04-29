@@ -747,6 +747,13 @@ packages:
       relative: true
     source: path
     version: "0.0.0"
+  session_storage:
+    dependency: "direct main"
+    description:
+      path: "../session_storage"
+      relative: true
+    source: path
+    version: "0.0.0"
   shelf:
     dependency: transitive
     description:

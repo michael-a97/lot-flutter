@@ -248,6 +248,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter a valid 6 digit code'**
   String get otpErrorText;
+
+  /// Shown on sign in screen
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get signIn;
+
+  /// Shown on sign in screen
+  ///
+  /// In en, this message translates to:
+  /// **'{error, select, empty {This field is required} invalid {Please enter a valid password} other {Invalid input.}}'**
+  String signInPasswordError(String error);
+
+  /// Shown on sign in screen
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an account yet?'**
+  String get createAccountSignInScreenPrompt;
+
+  /// Shown on sign in screen
+  ///
+  /// In en, this message translates to:
+  /// **'now'**
+  String get now;
+
+  /// Shown on sign in screen
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your phone number and password'**
+  String get signInScreenSubTitle;
+
+  /// Shown on sign in screen
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid phone number.'**
+  String get enterAValidPhoneNumber;
+
+  /// Shown on sign up screen
+  ///
+  /// In en, this message translates to:
+  /// **'Fill the form below to create your account'**
+  String get fillFormToCreateAccount;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

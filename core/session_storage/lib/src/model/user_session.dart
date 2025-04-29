@@ -48,4 +48,4 @@ class User extends Equatable {
   List<Object> get props => [id, firstName, lastName, role, phoneNumber];
 }
 
-enum Role { customer, attendant }
+enum Role { user, attendant }

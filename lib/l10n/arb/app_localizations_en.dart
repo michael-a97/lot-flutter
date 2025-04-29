@@ -149,4 +149,35 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get otpErrorText => 'Enter a valid 6 digit code';
+
+  @override
+  String get signIn => 'Sign in';
+
+  @override
+  String signInPasswordError(String error) {
+    String _temp0 = intl.Intl.selectLogic(
+      error,
+      {
+        'empty': 'This field is required',
+        'invalid': 'Please enter a valid password',
+        'other': 'Invalid input.',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get createAccountSignInScreenPrompt => 'Don\'t have an account yet?';
+
+  @override
+  String get now => 'now';
+
+  @override
+  String get signInScreenSubTitle => 'Enter your phone number and password';
+
+  @override
+  String get enterAValidPhoneNumber => 'Please enter a valid phone number.';
+
+  @override
+  String get fillFormToCreateAccount => 'Fill the form below to create your account';
 }

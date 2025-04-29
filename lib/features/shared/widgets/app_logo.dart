@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../gen/assets.gen.dart';
 
 class AppLogo extends StatelessWidget {
-  const AppLogo({super.key});
+  final double size;
+  final Color? color;
+
+  const AppLogo({super.key, this.size = 128, this.color});
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      'Lot.',
-      style: Theme.of(context).textTheme.displayLarge?.copyWith(
-        fontWeight: FontWeight.bold,
-        fontFamily: 'Boldonse',
-      ),
+    return SvgPicture.asset(
+      Assets.svgs.lotLogo,
+      height: size,
+      width: size,
+      colorFilter:
+          color != null ? ColorFilter.mode(color!, BlendMode.srcATop) : null,
     );
   }
 }

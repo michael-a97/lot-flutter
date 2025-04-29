@@ -24,6 +24,7 @@ dependencies:
   flutter_libphonenumber: ^2.5.1
   flutter_localizations:
     sdk: flutter
+  flutter_svg: ^2.1.0
   formz: ^0.8.0
   gap: ^3.0.1
   get_it: ^8.0.3
@@ -56,3 +57,4 @@ flutter:
         - asset: assets/fonts/Boldonse-Regular.ttf
   assets:
     - assets/fonts/Boldonse-Regular.ttf
+    - assets/svgs/

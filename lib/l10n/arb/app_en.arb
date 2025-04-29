@@ -121,21 +121,53 @@
   "@phoneNumberValidationError": {
     "description": "Shown on signup screen"
   },
-  "phoneNumberVerificationFailed":"Phone number verification failed",
-  "@phoneNumberVerificationFailed":{
-      "description":"Shown on sign up screen"
+  "phoneNumberVerificationFailed": "Phone number verification failed",
+  "@phoneNumberVerificationFailed": {
+    "description": "Shown on sign up screen"
   },
-  "phoneNumberVerificationTimedOut":"Phone number verification timed out",
+  "phoneNumberVerificationTimedOut": "Phone number verification timed out",
   "@phoneNumberVerificationTimedOut": {
     "description": "Shown on sign up screen"
   },
-  "signUpSuccessful":"Successfully created an account",
-  "@signUpSuccessful":{
-      "description":"Shown on sign up screen"
+  "signUpSuccessful": "Successfully created an account",
+  "@signUpSuccessful": {
+    "description": "Shown on sign up screen"
   },
-  "otpErrorText":"Enter a valid 6 digit code",
-  "@otpErrorText":{
+  "otpErrorText": "Enter a valid 6 digit code",
+  "@otpErrorText": {
+    "description": "Shown on sign up screen"
+  },
+  "signIn": "Sign in",
+  "@signIn": {
+    "description": "Shown on sign in screen"
+  },
+  "signInPasswordError": "{error, select, empty {This field is required} invalid {Please enter a valid password} other {Invalid input.}}",
+  "@signInPasswordError": {
+    "description": "Shown on sign in screen",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "createAccountSignInScreenPrompt": "Don't have an account yet?",
+  "@createAccountSignInScreenPrompt": {
+    "description": "Shown on sign in screen"
+  },
+  "now":"now",
+  "@now":{
+      "description":"Shown on sign in screen"
+  },
+  "signInScreenSubTitle":"Enter your phone number and password",
+  "@signInScreenSubTitle":{
+      "description":"Shown on sign in screen"
+  },
+  "enterAValidPhoneNumber":"Please enter a valid phone number.",
+  "@enterAValidPhoneNumber":{
+      "description":"Shown on sign in screen"
+  },
+  "fillFormToCreateAccount":"Fill the form below to create your account",
+  "@fillFormToCreateAccount":{
       "description":"Shown on sign up screen"
-
   }
 }

@@ -16,7 +16,9 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:lot/config/router/router.dart' as _i489;
 import 'package:lot/features/phone_number_verification/application/phone_number_verification_cubit.dart'
     as _i619;
+import 'package:lot/features/sign_in/application/sign_in_cubit.dart' as _i465;
 import 'package:lot/features/sign_up/application/sign_up_cubit.dart' as _i795;
+import 'package:session_storage/src/di/di.module.dart' as _i397;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -26,14 +28,20 @@ extension GetItInjectableX on _i174.GetIt {
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     await _i359.DataPackageModule().init(gh);
-    gh.factory<_i489.AppRouter>(() => _i489.AppRouter());
+    await _i397.SessionStoragePackageModule().init(gh);
+    gh.factory<_i795.SignUpCubit>(
+      () => _i795.SignUpCubit(gh<_i437.AccountRepository>()),
+    );
+    gh.factory<_i489.AppRouter>(
+      () => _i489.AppRouter(gh<_i437.AuthenticationRepository>()),
+    );
+    gh.factory<_i465.SignInCubit>(
+      () => _i465.SignInCubit(gh<_i437.AuthenticationRepository>()),
+    );
     gh.factory<_i619.PhoneNumberVerificationCubit>(
       () => _i619.PhoneNumberVerificationCubit(
         gh<_i437.AuthenticationRepository>(),
       ),
-    );
-    gh.factory<_i795.SignUpCubit>(
-      () => _i795.SignUpCubit(gh<_i437.AccountRepository>()),
     );
     return this;
   }

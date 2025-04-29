@@ -32,7 +32,6 @@ class PhoneNumberInputField extends StatefulWidget {
   final String? validationError;
   final bool keepInitialValueUpdated;
   final List<String> supportedCountries;
-
   const PhoneNumberInputField({
     super.key,
     this.onChanged,

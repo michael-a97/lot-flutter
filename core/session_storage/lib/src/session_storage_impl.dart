@@ -1,19 +1,19 @@
 part of 'session_storage.dart';
 
+@Singleton(as: SessionStorage)
 class SessionStorageImpl implements SessionStorage {
-  final SecureStorage _secureStorage;
+  final Storage _secureStorage;
   static const int _storageVersion = 1;
   static const String key = 'user_session_v$_storageVersion';
-  final StreamController<UserSession?> _userSessionStreamController =
-      StreamController();
+  final BehaviorSubject<UserSession?> _userSessionBehaviorSubject =
+      BehaviorSubject();
 
   SessionStorageImpl(this._secureStorage);
 
   @override
   Future<void> deleteSession() async {
     await _secureStorage.delete(key: key);
-
-    _userSessionStreamController.add(null);
+    _userSessionBehaviorSubject.add(null);
   }
 
   @override
@@ -30,12 +30,14 @@ class SessionStorageImpl implements SessionStorage {
   Future<void> saveSession(UserSession userSession) async {
     final jsonString = jsonEncode(userSession.toJson());
     await _secureStorage.write(key: key, value: jsonString);
-    _userSessionStreamController.add(userSession);
+    _userSessionBehaviorSubject.add(userSession);
   }
 
   @override
-  Stream<UserSession?> watchSession() => _userSessionStreamController.stream;
+  Stream<UserSession?> watchSession() {
+    return _userSessionBehaviorSubject.asBroadcastStream().distinct();
+  }
 
   @override
-  void close() => _userSessionStreamController.close();
+  void close() => _userSessionBehaviorSubject.close();
 }

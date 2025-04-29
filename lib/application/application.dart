@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:data/data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -17,7 +19,6 @@ class Application extends StatelessWidget {
     final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
         GlobalKey<ScaffoldMessengerState>();
     return MaterialApp.router(
-      routerConfig: appRouter.config(),
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => context.l10n.appName,
       supportedLocales: AppLocalizations.supportedLocales,
@@ -27,6 +28,14 @@ class Application extends StatelessWidget {
       ],
       theme: theme,
       scaffoldMessengerKey: rootScaffoldMessengerKey,
+      routerConfig: appRouter.config(
+        reevaluateListenable: ReevaluateListenable.stream(
+          getIt<SessionStorage>().watchSession().map((session) {
+            return session != null;
+          }),
+        ),
+        navigatorObservers: () => [AutoRouteObserver()],
+      ),
     );
   }
 }

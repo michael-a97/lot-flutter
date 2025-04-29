@@ -1,13 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:injectable/injectable.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:secure_storage/secure_storage.dart';
 
 import 'model/user_session.dart';
+
 part 'session_storage_impl.dart';
 
 /// This is an abstract class that defines the contract for session storage.
 abstract interface class SessionStorage {
+  factory SessionStorage(Storage secureStorage) = SessionStorageImpl;
+
   /// Saves the user session to secure storage.
   Future<void> saveSession(UserSession userSession);
 

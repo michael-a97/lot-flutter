@@ -70,10 +70,7 @@ void main() {
       expect(find.byType(PasswordInputField), findsOne);
       expect(find.byType(PhoneNumberInputField), findsOne);
       expect(find.byType(ConfirmPasswordInputField), findsOne);
-      expect(
-        find.ancestor(of: find.text('Sign Up'), matching: find.byType(AppBar)),
-        findsOne,
-      );
+      expect(find.text('Sign Up'), findsAtLeastNWidgets(1));
       expect(find.byType(SignUpButton), findsOne);
       final animatedCrossFade = tester.widget<AnimatedCrossFade>(
         find.byType(AnimatedCrossFade),

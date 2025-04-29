@@ -5,8 +5,9 @@ import '../api.dart';
 
 class ApiClient {
   final UserApiDataSource user;
+  final AuthenticationApiDataSource authentication;
 
-  const ApiClient._({required this.user});
+  const ApiClient._({required this.user, required this.authentication});
 
   factory ApiClient.create({
     bool log = false,
@@ -18,7 +19,10 @@ class ApiClient {
       debug: debug,
       log: log,
     );
-    return ApiClient._(user: UserApiDataSourceImpl(httpClient));
+    return ApiClient._(
+      user: UserApiDataSourceImpl(httpClient),
+      authentication: AuthenticationApiDataSourceImpl(httpClient),
+    );
   }
 
   static Dio _createHttpClient({

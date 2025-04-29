@@ -3,8 +3,7 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:secure_storage/secure_storage.dart';
-import 'package:session_storage.dart/src/model/user_session.dart';
-import 'package:session_storage.dart/src/session_storage.dart';
+import 'package:session_storage/session_storage.dart';
 
 void main() {
   group('$SessionStorageImpl', () {
@@ -50,6 +49,9 @@ void main() {
 
     group('watchSession', () {
       test('should return a stream of user session', () async {
+        when(
+          () => secureStorage.read(key: 'user_session_v1'),
+        ).thenAnswer((_) async => jsonEncode(_userSession.toJson()));
         final result = storageImpl.watchSession();
         expect(result, isA<Stream<UserSession?>>());
       });
@@ -57,6 +59,9 @@ void main() {
       test(
         'should emit new user session when a new user session is saved',
         () async {
+          when(
+            () => secureStorage.read(key: 'user_session_v1'),
+          ).thenAnswer((_) async => jsonEncode(_userSession.toJson()));
           when(
             () => secureStorage.write(
               key: 'user_session_v1',
@@ -75,6 +80,9 @@ void main() {
         when(
           () => secureStorage.delete(key: 'user_session_v1'),
         ).thenAnswer((_) async {});
+        when(
+          () => secureStorage.read(key: 'user_session_v1'),
+        ).thenAnswer((_) async => jsonEncode(_userSession.toJson()));
 
         await storageImpl.deleteSession();
         final stream = storageImpl.watchSession();
@@ -94,7 +102,7 @@ const _userSession = UserSession(
     id: 1,
     firstName: 'John',
     lastName: 'Doe',
-    role: Role.customer,
+    role: Role.user,
     phoneNumber: '+251923001100',
   ),
 );
