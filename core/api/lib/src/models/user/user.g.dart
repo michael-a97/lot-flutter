@@ -14,12 +14,4 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
   role: $enumDecode(_$RoleEnumMap, json['role']),
 );
 
-Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-  'id': instance.id,
-  'phone_number': instance.phoneNumber,
-  'first_name': instance.firstName,
-  'last_name': instance.lastName,
-  'role': _$RoleEnumMap[instance.role]!,
-};
-
 const _$RoleEnumMap = {Role.user: 'user', Role.attendant: 'attendant'};

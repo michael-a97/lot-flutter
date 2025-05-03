@@ -1,5 +1,6 @@
 import 'package:api/api.dart' as api;
 import 'package:dtos/dtos.dart' as dtos;
+import 'package:session_storage/session_storage.dart' as session_storage;
 
 extension SignUpRequestMapper on dtos.SignUpRequestDto {
   api.SignUpRequest toApi({
@@ -25,6 +26,21 @@ extension UserMapper on api.User {
       firstName: firstName,
       lastName: lastName,
       role: role.toDto(),
+    );
+  }
+}
+
+extension UserSessionStorageMapper on api.User {
+  session_storage.User toUserSessionStorageModel() {
+    return session_storage.User(
+      id: id,
+      phoneNumber: phoneNumber,
+      firstName: firstName,
+      lastName: lastName,
+      role: switch (role) {
+        api.Role.user => session_storage.Role.user,
+        api.Role.attendant => session_storage.Role.attendant,
+      },
     );
   }
 }

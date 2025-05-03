@@ -8,12 +8,13 @@ import 'dart:async' as _i687;
 
 import 'package:api/api.dart' as _i24;
 import 'package:data/src/account/repository/account_repository.dart' as _i555;
-import 'package:data/src/auth/repository/authentication_repository.dart'
-    as _i195;
+import 'package:data/src/authentication/repository/authentication_repository.dart'
+    as _i364;
 import 'package:data/src/di/module/data_module.dart' as _i73;
 import 'package:database/database.dart' as _i252;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:session_storage/session_storage.dart' as _i698;
 
 class DataPackageModule extends _i526.MicroPackageModule {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -21,9 +22,6 @@ class DataPackageModule extends _i526.MicroPackageModule {
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
     final dataModule = _$DataModule();
     gh.lazySingleton<_i59.FirebaseAuth>(() => dataModule.firebaseAuth());
-    gh.factory<_i195.AuthenticationRepository>(
-      () => _i195.AuthenticationRepositoryImpl(gh<_i59.FirebaseAuth>()),
-    );
     gh.lazySingleton<_i24.ApiClient>(
       () => dataModule.apiClient(debug: gh<bool>(instanceName: 'debug')),
     );
@@ -38,6 +36,13 @@ class DataPackageModule extends _i526.MicroPackageModule {
         gh<_i24.ApiClient>(),
         gh<_i252.AppDatabase>(),
         gh<_i59.FirebaseAuth>(),
+      ),
+    );
+    gh.factory<_i364.AuthenticationRepository>(
+      () => _i364.AuthenticationRepositoryImpl(
+        gh<_i24.ApiClient>(),
+        gh<_i59.FirebaseAuth>(),
+        gh<_i698.SessionStorage>(),
       ),
     );
   }

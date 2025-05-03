@@ -1,18 +1,30 @@
+import 'package:api/api.dart';
 import 'package:dartz/dartz.dart';
 import 'package:data/data.dart';
-import 'package:dtos/dtos.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dtos/dtos.dart' hide Role;
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:session_storage/session_storage.dart' as session_storage;
+
+import '../../helpers/mock_api_client.dart';
 
 void main() {
   group('$AuthenticationRepositoryImpl', () {
     late FirebaseAuth firebaseAuth;
     late AuthenticationRepositoryImpl authenticationRepositoryImpl;
+    late ApiClient apiClient;
+    late session_storage.SessionStorage sessionStorage;
 
     setUp(() {
+      apiClient = MockApiClient();
       firebaseAuth = _MockFirebaseAuth();
-      authenticationRepositoryImpl = AuthenticationRepositoryImpl(firebaseAuth);
+      sessionStorage = MockSessionStorage();
+      authenticationRepositoryImpl = AuthenticationRepositoryImpl(
+        apiClient,
+        firebaseAuth,
+        sessionStorage,
+      );
     });
 
     group('requestPhoneVerification', () {
@@ -187,6 +199,92 @@ void main() {
         verify(() => firebaseAuth.signInWithCredential(any())).called(1);
       });
     });
+
+    group('signIn', () {
+      test('should save session when successful', () async {
+        const request = SignInFormDto(
+          phoneNumber: '+251923000000',
+          password: 'password',
+        );
+
+        when(
+          () => sessionStorage.saveSession(
+            const session_storage.UserSession(
+              accessToken: 'access-token',
+              refreshToken: 'refresh-token',
+              user: session_storage.User(
+                id: 1,
+                phoneNumber: '+251923000000',
+                firstName: 'John',
+                lastName: 'Doe',
+                role: session_storage.Role.user,
+              ),
+            ),
+          ),
+        ).thenAnswer((_) async {});
+
+        when(
+          () => apiClient.authentication.signIn(
+            SignInRequest(
+              phoneNumber: request.phoneNumber,
+              password: request.password,
+            ),
+          ),
+        ).thenAnswer(
+          (_) async => right(
+            const SignInResponse(
+              user: User(
+                id: 1,
+                phoneNumber: '+251923000000',
+                firstName: 'John',
+                lastName: 'Doe',
+                role: Role.user,
+              ),
+              accessToken: 'access-token',
+              refreshToken: 'refresh-token',
+            ),
+          ),
+        );
+
+        await authenticationRepositoryImpl.signIn(request);
+
+        verify(
+          () => sessionStorage.saveSession(
+            const session_storage.UserSession(
+              accessToken: 'access-token',
+              refreshToken: 'refresh-token',
+              user: session_storage.User(
+                id: 1,
+                phoneNumber: '+251923000000',
+                firstName: 'John',
+                lastName: 'Doe',
+                role: session_storage.Role.user,
+              ),
+            ),
+          ),
+        ).called(1);
+      });
+
+      test('should return error when unsuccessful', () async {
+        const request = SignInFormDto(
+          phoneNumber: '+251923000000',
+          password: 'password',
+        );
+
+        when(
+          () => apiClient.authentication.signIn(
+            SignInRequest(
+              phoneNumber: request.phoneNumber,
+              password: request.password,
+            ),
+          ),
+        ).thenAnswer((_) async => left(const ApiNetworkError.timeout()));
+
+        final response = await authenticationRepositoryImpl.signIn(request);
+
+        expect(response, left(const ApiNetworkError.timeout()));
+      });
+    });
   });
 }
 
@@ -195,3 +293,6 @@ class _FakeUserCredential extends Fake implements UserCredential {}
 class _MockFirebaseAuth extends Mock implements FirebaseAuth {}
 
 class _MockPhoneAuthCredential extends Mock implements PhoneAuthCredential {}
+
+class MockSessionStorage extends Mock
+    implements session_storage.SessionStorage {}

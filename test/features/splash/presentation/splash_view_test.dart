@@ -35,7 +35,7 @@ void main() {
     }
 
     testWidgets('should render correctly', (tester) async {
-      when(() => router.replace(const SignUpRoute())).thenAnswer((_) {
+      when(() => router.replace(const HomeRoute())).thenAnswer((_) {
         return Future.value();
       });
       AppConfig(version: '123', baseHttpUrl: 'http://localhost:8000');

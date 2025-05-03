@@ -47,7 +47,7 @@ class SignUpView extends StatelessWidget {
         BlocListener<SignUpCubit, SignUpState>(listener: _signUpListener),
       ],
       child: Scaffold(
-        appBar: AppBar(title: Text(l10n.signUp)),
+        appBar: AppBar(backgroundColor: Colors.transparent),
         body: SafeArea(
           child: Column(
             children: [
@@ -55,6 +55,22 @@ class SignUpView extends StatelessWidget {
                 child: ListView(
                   padding: const EdgeInsets.all(Spacing.lg),
                   children: [
+                    Text(
+                      l10n.signUp,
+                      style: context.theme.textTheme.displaySmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Gap(Spacing.sm),
+                    Text(
+                      l10n.fillFormToCreateAccount,
+                      style: context.theme.textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey.shade600,
+                      ),
+                    ),
+                    const Gap(Spacing.xxxl),
+
                     const FirstNameInputField(),
                     const Gap(Spacing.lg),
                     const LastNameInputField(),
