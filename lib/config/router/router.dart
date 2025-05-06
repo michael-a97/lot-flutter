@@ -4,6 +4,7 @@ import 'package:data/data.dart';
 import 'package:injectable/injectable.dart';
 
 import '../config.dart';
+import 'router.gr.dart';
 export 'router.gr.dart';
 
 @injectable
