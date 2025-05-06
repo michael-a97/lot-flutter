@@ -13,7 +13,6 @@ import 'package:data/data.dart' as _i437;
 import 'package:data/src/di/di.module.dart' as _i359;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
-import 'package:lot/config/router/router.dart' as _i489;
 import 'package:lot/features/phone_number_verification/application/phone_number_verification_cubit.dart'
     as _i619;
 import 'package:lot/features/sign_in/application/sign_in_cubit.dart' as _i465;
@@ -32,8 +31,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i795.SignUpCubit>(
       () => _i795.SignUpCubit(gh<_i437.AccountRepository>()),
     );
-    gh.factory<_i489.AppRouter>(
-      () => _i489.AppRouter(gh<_i437.AuthenticationRepository>()),
+    gh.factory<AppRouter>(
+      () => AppRouter(gh<_i437.AuthenticationRepository>()),
     );
     gh.factory<_i465.SignInCubit>(
       () => _i465.SignInCubit(gh<_i437.AuthenticationRepository>()),
