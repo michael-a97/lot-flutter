@@ -7,15 +7,15 @@ part of 'user_session.dart';
 // **************************************************************************
 
 UserSession _$UserSessionFromJson(Map<String, dynamic> json) => UserSession(
-  accessToken: json['accessToken'] as String,
-  refreshToken: json['refreshToken'] as String,
+  accessToken: json['access_token'] as String,
+  refreshToken: json['refresh_token'] as String,
   user: User.fromJson(json['user'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$UserSessionToJson(UserSession instance) =>
     <String, dynamic>{
-      'accessToken': instance.accessToken,
-      'refreshToken': instance.refreshToken,
+      'access_token': instance.accessToken,
+      'refresh_token': instance.refreshToken,
       'user': instance.user,
     };
 

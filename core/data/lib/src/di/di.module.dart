@@ -23,7 +23,10 @@ class DataPackageModule extends _i526.MicroPackageModule {
     final dataModule = _$DataModule();
     gh.lazySingleton<_i59.FirebaseAuth>(() => dataModule.firebaseAuth());
     gh.lazySingleton<_i24.ApiClient>(
-      () => dataModule.apiClient(debug: gh<bool>(instanceName: 'debug')),
+      () => dataModule.apiClient(
+        debug: gh<bool>(instanceName: 'debug'),
+        sessionStorage: gh<_i698.SessionStorage>(),
+      ),
     );
     gh.lazySingleton<_i252.AppDatabase>(
       () => dataModule.appDatabase(
@@ -31,18 +34,18 @@ class DataPackageModule extends _i526.MicroPackageModule {
         debug: gh<bool>(instanceName: 'debug'),
       ),
     );
-    gh.factory<_i555.AccountRepository>(
-      () => _i555.AccountRepositoryImpl(
-        gh<_i24.ApiClient>(),
-        gh<_i252.AppDatabase>(),
-        gh<_i59.FirebaseAuth>(),
-      ),
-    );
     gh.factory<_i364.AuthenticationRepository>(
       () => _i364.AuthenticationRepositoryImpl(
         gh<_i24.ApiClient>(),
         gh<_i59.FirebaseAuth>(),
         gh<_i698.SessionStorage>(),
+      ),
+    );
+    gh.factory<_i555.AccountRepository>(
+      () => _i555.AccountRepositoryImpl(
+        gh<_i24.ApiClient>(),
+        gh<_i252.AppDatabase>(),
+        gh<_i59.FirebaseAuth>(),
       ),
     );
   }

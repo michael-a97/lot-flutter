@@ -3,6 +3,7 @@ import 'package:config/config.dart';
 import 'package:database/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
+import 'package:session_storage/session_storage.dart';
 
 @module
 abstract class DataModule {
@@ -17,10 +18,14 @@ abstract class DataModule {
   }
 
   @lazySingleton
-  ApiClient apiClient({@Named('debug') bool debug = false}) {
+  ApiClient apiClient({
+    @Named('debug') bool debug = false,
+    required SessionStorage sessionStorage,
+  }) {
     return ApiClient.create(
       baseUrl: AppConfig.instance.baseHttpUrl,
       debug: debug,
+      sessionStorage: sessionStorage,
     );
   }
 
