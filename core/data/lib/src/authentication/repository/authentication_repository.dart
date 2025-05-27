@@ -34,7 +34,11 @@ abstract class AuthenticationRepository {
   /// Deletes stored user session.
   Future<void> signOut();
 
+  /// Checks if there is a user session stored in the local storage.
   Future<bool> isUserAuthenticated();
+
+  /// Resets the password for the user with the given [request].
+  Future<NetworkResponse<Unit>> resetPassword(PasswordResetRequestDto request);
 }
 
 /// The maximum amount of time you are willing to wait for SMS auto-retrieval to

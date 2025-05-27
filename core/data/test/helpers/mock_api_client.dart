@@ -6,14 +6,14 @@ class MockApiClient extends Mock implements ApiClient {
   final _mockAuthenticationApiDataSource = MockAuthenticationApiDataSource();
 
   @override
-  UserApiDataSource get user => _mockUserApiDataSource;
+  AccountApiDataSource get user => _mockUserApiDataSource;
 
   @override
   AuthenticationApiDataSource get authentication =>
       _mockAuthenticationApiDataSource;
 }
 
-class MockUserApiDataSource extends Mock implements UserApiDataSource {}
+class MockUserApiDataSource extends Mock implements AccountApiDataSource {}
 
 class MockAuthenticationApiDataSource extends Mock
     implements AuthenticationApiDataSource {}

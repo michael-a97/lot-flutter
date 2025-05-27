@@ -1,9 +1,9 @@
-part of 'user_api_data_source.dart';
+part of 'account_api_data_source.dart';
 
-class UserApiDataSourceImpl implements UserApiDataSource {
+class AccountApiDataSourceImpl implements AccountApiDataSource {
   final Dio _client;
 
-  const UserApiDataSourceImpl(this._client);
+  const AccountApiDataSourceImpl(this._client);
 
   @override
   Future<NetworkResponse<User>> signUp(SignUpRequest request) async {

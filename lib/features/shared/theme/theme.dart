@@ -1,5 +1,6 @@
 // coverage:ignore-file
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'spacing.dart';
@@ -32,7 +33,10 @@ final theme = ThemeData(
   ),
   scaffoldBackgroundColor: AppColors.lightGreyBackgroundColor,
   fontFamily: fontFamily,
-  appBarTheme: const AppBarTheme(color: AppColors.primaryColor),
+  appBarTheme: const AppBarTheme(
+    color: AppColors.primaryColor,
+    systemOverlayStyle: SystemUiOverlayStyle.dark,
+  ),
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
     fillColor: Colors.white,

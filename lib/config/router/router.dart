@@ -14,6 +14,7 @@ class AppRouter extends RootStackRouter {
     SplashRoute.name,
     SignInRoute.name,
     SignUpRoute.name,
+    ForgotPasswordRoute.name,
   ];
   final AuthenticationRepository _authenticationRepository;
 
@@ -27,6 +28,7 @@ class AppRouter extends RootStackRouter {
     AdaptiveRoute(page: SplashRoute.page, initial: true),
     AdaptiveRoute(page: SignUpRoute.page),
     AdaptiveRoute(page: SignInRoute.page),
+    AdaptiveRoute(page: ForgotPasswordRoute.page),
     AdaptiveRoute(page: HomeRoute.page),
   ];
 

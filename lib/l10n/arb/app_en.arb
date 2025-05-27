@@ -154,20 +154,44 @@
   "@createAccountSignInScreenPrompt": {
     "description": "Shown on sign in screen"
   },
-  "now":"now",
-  "@now":{
-      "description":"Shown on sign in screen"
+  "now": "now",
+  "@now": {
+    "description": "Shown on sign in screen"
   },
-  "signInScreenSubTitle":"Enter your phone number and password",
-  "@signInScreenSubTitle":{
-      "description":"Shown on sign in screen"
+  "signInScreenSubTitle": "Enter your phone number and password",
+  "@signInScreenSubTitle": {
+    "description": "Shown on sign in screen"
   },
-  "enterAValidPhoneNumber":"Please enter a valid phone number.",
-  "@enterAValidPhoneNumber":{
-      "description":"Shown on sign in screen"
+  "enterAValidPhoneNumber": "Please enter a valid phone number.",
+  "@enterAValidPhoneNumber": {
+    "description": "Shown on sign in screen"
   },
-  "fillFormToCreateAccount":"Fill the form below to create your account",
-  "@fillFormToCreateAccount":{
-      "description":"Shown on sign up screen"
+  "fillFormToCreateAccount": "Fill the form below to create your account",
+  "@fillFormToCreateAccount": {
+    "description": "Shown on sign up screen"
+  },
+  "forgotPasswordPrompt": "Forgot password?",
+  "@forgotPasswordPrompt": {
+    "description": "Shown on sign in screen"
+  },
+  "forgotPasswordTitle": "Forgot Password",
+  "@forgotPasswordTitle": {
+    "description": "Shown on forgot password screen"
+  },
+  "resetPassword":"Reset password",
+  "@resetPassword":{
+      "description":"Shown on forgot password screen"
+  },
+  "newPassword":"New password",
+  "@newPassword":{
+      "description":"Shown on forgot password screen"
+  },
+  "forgotPasswordSubheading":"Verify your phone number to reset your password and set a new one.",
+  "@forgotPasswordSubheading":{
+      "description":"Shown on "
+  },
+  "successfullyResetPassword":"Successfully reset password",
+  "@successfullyResetPassword":{
+      "description":"Shown on "
   }
 }
