@@ -92,7 +92,17 @@ class SignUpView extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SignUpButton(),
+                BlocBuilder<
+                  PhoneNumberVerificationCubit,
+                  PhoneNumberVerificationState
+                >(
+                  builder: (context, state) {
+                    if (state.status is! StatusOtpVerificationComplete) {
+                      return const SizedBox();
+                    }
+                    return const SignUpButton();
+                  },
+                ),
               ],
             ),
           ),

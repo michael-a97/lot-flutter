@@ -71,11 +71,30 @@ void main() {
       expect(find.byType(PhoneNumberInputField), findsOne);
       expect(find.byType(ConfirmPasswordInputField), findsOne);
       expect(find.text('Sign Up'), findsAtLeastNWidgets(1));
-      expect(find.byType(SignUpButton), findsOne);
       final animatedCrossFade = tester.widget<AnimatedCrossFade>(
         find.byType(AnimatedCrossFade),
       );
       expect(animatedCrossFade.crossFadeState, CrossFadeState.showFirst);
+    });
+
+    testWidgets('should show sign up button when phone number is valid', (
+      tester,
+    ) async {
+      const phoneNumberState = PhoneNumberVerificationState(
+        status: StatusOtpVerificationComplete(),
+      );
+      whenListen(phoneNumberVerificationCubit, Stream.value(phoneNumberState));
+      when(
+        () => phoneNumberVerificationCubit.state,
+      ).thenReturn(phoneNumberState);
+
+      const signUpState = SignUpState();
+      whenListen(signUpCubit, Stream.value(signUpState));
+      when(() => signUpCubit.state).thenReturn(signUpState);
+
+      await pumpWidgetUnderTest(tester);
+
+      expect(find.byType(SignUpButton), findsOne);
     });
 
     testWidgets('should show a progress indicator when loading', (
