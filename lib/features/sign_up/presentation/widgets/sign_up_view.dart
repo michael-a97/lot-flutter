@@ -71,7 +71,7 @@ class SignUpView extends StatelessWidget {
                             builder: (context, state) {
                               return AnimatedCrossFade(
                                 crossFadeState:
-                                    state.isPhoneNumberValid
+                                    (state.isPhoneNumberValid ?? false)
                                         ? CrossFadeState.showSecond
                                         : CrossFadeState.showFirst,
                                 firstCurve: Curves.elasticIn,

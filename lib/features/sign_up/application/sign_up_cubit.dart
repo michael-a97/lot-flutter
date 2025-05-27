@@ -55,7 +55,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   Future<void> submit() async {
     final form = state.form.validate();
     _onFormEdited(form);
-    if (!form.isValid) {
+    if (!form.isValid || !(state.isPhoneNumberValid ?? false)) {
       return;
     }
     emit(state.loading());

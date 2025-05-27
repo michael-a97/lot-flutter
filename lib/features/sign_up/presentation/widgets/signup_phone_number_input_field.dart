@@ -26,7 +26,7 @@ class SignUpPhoneNumberInputField extends StatelessWidget {
                   (it) => context.read<SignUpCubit>().onPhoneNumberChanged(it),
               borderRadius: 4,
               validationError:
-                  state.phoneNumber != null && !state.isPhoneNumberValid
+                  state.isPhoneNumberValid != null && !state.isPhoneNumberValid!
                       ? context.l10n.phoneNumberValidationError
                       : null,
             );
