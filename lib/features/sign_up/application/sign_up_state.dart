@@ -3,7 +3,7 @@ part of 'sign_up_cubit.dart';
 class SignUpState extends Equatable {
   final SignUpForm form;
   final String? phoneNumber;
-  final bool isPhoneNumberValid;
+  final bool? isPhoneNumberValid;
   final FormzSubmissionStatus status;
   final ApiNetworkError? error;
 
@@ -12,7 +12,7 @@ class SignUpState extends Equatable {
     this.phoneNumber,
     this.status = FormzSubmissionStatus.initial,
     this.error,
-    this.isPhoneNumberValid = false,
+    this.isPhoneNumberValid,
   });
 
   SignUpState loading() {

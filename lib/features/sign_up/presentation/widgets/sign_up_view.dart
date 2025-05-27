@@ -71,7 +71,7 @@ class SignUpView extends StatelessWidget {
                             builder: (context, state) {
                               return AnimatedCrossFade(
                                 crossFadeState:
-                                    state.isPhoneNumberValid
+                                    (state.isPhoneNumberValid ?? false)
                                         ? CrossFadeState.showSecond
                                         : CrossFadeState.showFirst,
                                 firstCurve: Curves.elasticIn,
@@ -92,7 +92,17 @@ class SignUpView extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SignUpButton(),
+                BlocBuilder<
+                  PhoneNumberVerificationCubit,
+                  PhoneNumberVerificationState
+                >(
+                  builder: (context, state) {
+                    if (state.status is! StatusOtpVerificationComplete) {
+                      return const SizedBox();
+                    }
+                    return const SignUpButton();
+                  },
+                ),
               ],
             ),
           ),

@@ -108,6 +108,7 @@ void main() {
         seed:
             () => const SignUpState(
               phoneNumber: phoneNumber,
+              isPhoneNumberValid: true,
               form: SignUpForm(
                 firstName: NameInput.dirty(firstName),
                 lastName: NameInput.dirty(lastName),
@@ -155,6 +156,7 @@ void main() {
                   ),
                 ),
                 status: FormzSubmissionStatus.inProgress,
+                isPhoneNumberValid: true,
               ),
               SignUpState(
                 phoneNumber: phoneNumber,
@@ -168,6 +170,7 @@ void main() {
                   ),
                 ),
                 status: FormzSubmissionStatus.success,
+                isPhoneNumberValid: true,
               ),
             ],
       );
@@ -188,6 +191,7 @@ void main() {
                   password,
                 ),
               ),
+              isPhoneNumberValid: true,
             ),
         setUp: () {
           when(
@@ -216,6 +220,7 @@ void main() {
                   ),
                 ),
                 status: FormzSubmissionStatus.inProgress,
+                isPhoneNumberValid: true,
               ),
               SignUpState(
                 phoneNumber: phoneNumber,
@@ -230,6 +235,7 @@ void main() {
                 ),
                 status: FormzSubmissionStatus.failure,
                 error: ApiNetworkError.timeout(),
+                isPhoneNumberValid: true,
               ),
             ],
       );
