@@ -10,3 +10,5 @@ part 'sign_in_form.dart';
 part 'sign_in_response.dart';
 
 part 'user_session.dart';
+
+part 'password_reset_request_dto.dart';

@@ -17,4 +17,23 @@ class AuthenticationApiDataSourceImpl implements AuthenticationApiDataSource {
       return left(e.toNetworkOrApiError());
     }
   }
+
+  @override
+  Future<NetworkResponse<Unit>> resetPassword(
+    PasswordResetRequest request,
+  ) async {
+    try {
+      const path = '/api/v1/auth/reset-password';
+      final body = request.toJson();
+      final options = Options(
+        headers: {
+          'Authorization': 'Bearer ${request.phoneNumberVerificationToken}',
+        },
+      );
+      await _httpClient.post(path, data: body, options: options);
+      return right(unit);
+    } on DioException catch (e) {
+      return left(e.toNetworkOrApiError());
+    }
+  }
 }

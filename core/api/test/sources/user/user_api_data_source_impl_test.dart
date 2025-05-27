@@ -8,13 +8,13 @@ import '../../helpers/dio_helpers.dart';
 import 'user_api_data_source_fixtures.dart';
 
 void main() {
-  group('$UserApiDataSourceImpl', () {
+  group('$AccountApiDataSourceImpl', () {
     late Dio httpClient;
-    late UserApiDataSourceImpl userApiDataSourceImpl;
+    late AccountApiDataSourceImpl userApiDataSourceImpl;
 
     setUp(() {
       httpClient = MockDio();
-      userApiDataSourceImpl = UserApiDataSourceImpl(httpClient);
+      userApiDataSourceImpl = AccountApiDataSourceImpl(httpClient);
     });
 
     group('signUp', () {

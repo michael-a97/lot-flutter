@@ -98,4 +98,18 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
     final session = await _sessionStorage.getSession();
     return session != null;
   }
+
+  @override
+  Future<NetworkResponse<Unit>> resetPassword(
+    PasswordResetRequestDto request,
+  ) async {
+    final user = _firebaseAuth.currentUser;
+    final token = await user!.getIdToken();
+
+    final response = await _apiClient.authentication.resetPassword(
+      request.toApi(phoneNumberVerificationToken: token!),
+    );
+
+    return response;
+  }
 }

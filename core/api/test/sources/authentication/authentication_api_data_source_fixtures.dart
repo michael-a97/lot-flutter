@@ -1,4 +1,4 @@
-final signInSuccessResponse = {
+const signInSuccessResponse = {
   'status': 200,
   'message': '',
   'data': {
@@ -12,5 +12,12 @@ final signInSuccessResponse = {
       'role': 'attendant',
     },
   },
+  'error': null,
+};
+
+final passwordResetSuccessResponse = {
+  'status': 200,
+  'message': 'Password reset successfully',
+  'data': null,
   'error': null,
 };

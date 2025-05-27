@@ -24,3 +24,13 @@ SignInResponse _$SignInResponseFromJson(Map<String, dynamic> json) =>
       refreshToken: json['refresh_token'] as String,
       user: User.fromJson(json['user'] as Map<String, dynamic>),
     );
+
+Map<String, dynamic> _$PasswordResetRequestToJson(
+  PasswordResetRequest instance,
+) => <String, dynamic>{
+  'stringify': instance.stringify,
+  'hash_code': instance.hashCode,
+  'phone_number': instance.phoneNumber,
+  'new_password': instance.newPassword,
+  'props': instance.props,
+};

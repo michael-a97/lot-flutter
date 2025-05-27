@@ -291,6 +291,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Fill the form below to create your account'**
   String get fillFormToCreateAccount;
+
+  /// Shown on sign in screen
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get forgotPasswordPrompt;
+
+  /// Shown on forgot password screen
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot Password'**
+  String get forgotPasswordTitle;
+
+  /// Shown on forgot password screen
+  ///
+  /// In en, this message translates to:
+  /// **'Reset password'**
+  String get resetPassword;
+
+  /// Shown on forgot password screen
+  ///
+  /// In en, this message translates to:
+  /// **'New password'**
+  String get newPassword;
+
+  /// Shown on
+  ///
+  /// In en, this message translates to:
+  /// **'Verify your phone number to reset your password and set a new one.'**
+  String get forgotPasswordSubheading;
+
+  /// Shown on
+  ///
+  /// In en, this message translates to:
+  /// **'Successfully reset password'**
+  String get successfullyResetPassword;
 }
 
 class _AppLocalizationsDelegate

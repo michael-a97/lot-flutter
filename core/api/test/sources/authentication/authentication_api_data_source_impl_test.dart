@@ -48,5 +48,56 @@ void main() {
         expect(response, left(const ApiNetworkError.timeout()));
       });
     });
+
+    group('resetPassword', () {
+      const path = '/api/v1/auth/reset-password';
+      const phoneNumberVerificationToken = '123456';
+
+      const request = PasswordResetRequest(
+        phoneNumber: '+251923001100',
+        newPassword: 'pass1234',
+        phoneNumberVerificationToken: phoneNumberVerificationToken,
+      );
+
+      Future<Response> httpRequest() => httpClient.post(
+        path,
+        data: request.toJson(),
+        options: any(named: 'options'),
+      );
+
+      registerFallbackValue(
+        Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ${request.phoneNumberVerificationToken}',
+          },
+        ),
+      );
+
+      test('should return a Unit when successful', () async {
+        when(httpRequest).thenAnswer((_) async {
+          return FakeResponse(data: passwordResetSuccessResponse);
+        });
+
+        final response = await authenticationApiDataSourceImpl.resetPassword(
+          request,
+        );
+
+        expect(response.toOption().toNullable(), isA<Unit>());
+      });
+
+      test('should return a NetworkError when an error occurs', () async {
+        when(
+          httpRequest,
+        ).thenThrow(FakeDioException(DioExceptionType.connectionTimeout));
+
+        final response = await authenticationApiDataSourceImpl.resetPassword(
+          request,
+        );
+
+        expect(response, left(const ApiNetworkError.timeout()));
+      });
+    });
   });
 }

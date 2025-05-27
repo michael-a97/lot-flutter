@@ -169,4 +169,23 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get fillFormToCreateAccount =>
       'Fill the form below to create your account';
+
+  @override
+  String get forgotPasswordPrompt => 'Forgot password?';
+
+  @override
+  String get forgotPasswordTitle => 'Forgot Password';
+
+  @override
+  String get resetPassword => 'Reset password';
+
+  @override
+  String get newPassword => 'New password';
+
+  @override
+  String get forgotPasswordSubheading =>
+      'Verify your phone number to reset your password and set a new one.';
+
+  @override
+  String get successfullyResetPassword => 'Successfully reset password';
 }

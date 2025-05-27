@@ -19,6 +19,8 @@ part 'sign_in_button.dart';
 
 part 'sign_up_text.dart';
 
+part 'forgot_password_button.dart';
+
 class SignInView extends StatelessWidget {
   const SignInView({super.key});
 
@@ -56,6 +58,10 @@ class SignInView extends StatelessWidget {
                       const SignInPhoneNumberInputField(),
                       const Gap(Spacing.lg),
                       const SignInPasswordInputField(),
+                      const Align(
+                        alignment: Alignment.centerLeft,
+                        child: ForgotPasswordButton(),
+                      ),
                     ],
                   ),
                 ),

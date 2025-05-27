@@ -6,7 +6,7 @@ import '../api.dart';
 import 'interceptor/interceptor.dart';
 
 class ApiClient {
-  final UserApiDataSource user;
+  final AccountApiDataSource user;
   final AuthenticationApiDataSource authentication;
   final SessionStorage sessionStorage;
 
@@ -29,7 +29,7 @@ class ApiClient {
       log: log,
     );
     return ApiClient._(
-      user: UserApiDataSourceImpl(httpClient),
+      user: AccountApiDataSourceImpl(httpClient),
       authentication: AuthenticationApiDataSourceImpl(httpClient),
       sessionStorage: sessionStorage,
     );
