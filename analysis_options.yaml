@@ -97,3 +97,5 @@ linter:
     library_private_types_in_public_api: false
 
     discarded_futures: false
+
+    do_not_use_environment: false
