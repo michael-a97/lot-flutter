@@ -12,7 +12,10 @@ Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   await Firebase.initializeApp();
   final packageInfo = await PackageInfo.fromPlatform();
-  AppConfig(version: packageInfo.version, baseHttpUrl: 'http://10.0.2.2:8000');
+  AppConfig(
+    version: packageInfo.version,
+    baseHttpUrl: const String.fromEnvironment('API_BASE_URL'),
+  );
   await configureDependencies();
   AppBlocObserver.init();
   runApp(const Application());
